@@ -1,6 +1,7 @@
 package com.caio.smartaccessapi;
 
 
+import com.caio.smartaccessapi.exception.ErrorResponse;
 import com.caio.smartaccessapi.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,13 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, Object> handletNotFound(ResourceNotFoundException ex){
-        Map<String, Object> error = new HashMap<>();
-
-        error.put("timestamp", LocalDateTime.now());
-        error.put("status", 404);
-        error.put("error", ex.getMessage());
-
-        return error;
+    public ErrorResponse handletNotFound(ResourceNotFoundException ex){
+         return new ErrorResponse(LocalDateTime.now(), 404, ex.getMessage());
     }
 }
