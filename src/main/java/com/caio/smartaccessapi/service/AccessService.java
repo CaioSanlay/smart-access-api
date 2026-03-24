@@ -3,6 +3,7 @@ package com.caio.smartaccessapi.service;
 import com.caio.smartaccessapi.entity.Access;
 import com.caio.smartaccessapi.entity.Door;
 import com.caio.smartaccessapi.entity.User;
+import com.caio.smartaccessapi.exception.ResourceNotFoundException;
 import com.caio.smartaccessapi.repository.AccessRepository;
 import com.caio.smartaccessapi.repository.DoorRepository;
 import com.caio.smartaccessapi.repository.UserRepository;
@@ -25,10 +26,10 @@ public class AccessService {
 
     public Access register (Long userId, Long doorId){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Door not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));;
 
         Door door = doorRepository.findById(doorId)
-                .orElseThrow(() -> new RuntimeException("Door not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Door not found"));;
 
         Access access = new Access();
         access.setUser(user);
