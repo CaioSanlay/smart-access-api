@@ -1,6 +1,7 @@
 package com.caio.smartaccessapi;
 
 
+import com.caio.smartaccessapi.exception.DuplicateResourceException;
 import com.caio.smartaccessapi.exception.ErrorResponse;
 import com.caio.smartaccessapi.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -19,5 +20,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handletNotFound(ResourceNotFoundException ex){
          return new ErrorResponse(LocalDateTime.now(), 404, ex.getMessage());
+    }
+    @ExceptionHandler(DuplicateResourceException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleDuplicate(DuplicateResourceException ex) {
+
+        return new ErrorResponse(LocalDateTime.now(), 400, ex.getMessage());
     }
 }

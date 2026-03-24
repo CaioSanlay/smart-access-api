@@ -1,6 +1,7 @@
 package com.caio.smartaccessapi.service;
 
 import com.caio.smartaccessapi.entity.Door;
+import com.caio.smartaccessapi.exception.DuplicateResourceException;
 import com.caio.smartaccessapi.repository.DoorRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class DoorService {
         this.repository = repository;
     }
     public Door save(Door door) {
+        if (repository.existsByName(door.getName())){
+            throw new DuplicateResourceException("O nome da porta já existe");
+        }
         return repository.save(door);
     }
 
