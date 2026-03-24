@@ -3,6 +3,8 @@ package com.caio.smartaccessapi.controller;
 import com.caio.smartaccessapi.dto.UserRequestDTO;
 import com.caio.smartaccessapi.entity.User;
 import com.caio.smartaccessapi.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,18 +20,20 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody @jakarta.validation.Valid UserRequestDTO dto) {
+    public ResponseEntity<User> create(@RequestBody @jakarta.validation.Valid UserRequestDTO dto) {
 
         User user = new User();
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
 
-        return service.save(user);
+        User savedUser = service.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     @GetMapping
-    public List<User> getAll(){
-        return service.findAll();
+    public ResponseEntity<List<User>> getAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 
 }
