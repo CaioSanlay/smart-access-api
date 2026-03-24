@@ -1,11 +1,9 @@
 package com.caio.smartaccessapi.controller;
 
+import com.caio.smartaccessapi.dto.AccessRequestDTO;
 import com.caio.smartaccessapi.entity.Access;
 import com.caio.smartaccessapi.service.AccessService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/access")
@@ -18,7 +16,7 @@ public class AccessController {
     }
 
     @PostMapping
-    public Access register(@RequestParam Long userId, @RequestParam Long doorId){
-        return  service.register(userId, doorId);
+    public Access register(@RequestBody AccessRequestDTO dto){
+        return  service.register(dto.getUserId(), dto.getDoorId());
     }
 }

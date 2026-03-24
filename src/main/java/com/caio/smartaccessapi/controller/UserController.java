@@ -1,5 +1,6 @@
 package com.caio.smartaccessapi.controller;
 
+import com.caio.smartaccessapi.dto.UserRequestDTO;
 import com.caio.smartaccessapi.entity.User;
 import com.caio.smartaccessapi.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody @jakarta.validation.Valid User user) {
+    public User create(@RequestBody @jakarta.validation.Valid UserRequestDTO dto) {
+
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+
         return service.save(user);
     }
 
