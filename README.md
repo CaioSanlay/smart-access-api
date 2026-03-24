@@ -1,6 +1,6 @@
 # Smart Access API
 
-Projeto desenvolvido para praticar backend com Spring Boot, simulando um sistema de controle de acesso (usuários e portas).
+API REST desenvolvida com Spring Boot para controle de acesso em ambientes, simulando um sistema real de autenticação por usuários e portas.
 
 A ideia foi construir uma API completa, aplicando boas práticas como separação em camadas, uso de DTO, tratamento de exceções e algumas regras de negócio.
 
@@ -19,7 +19,7 @@ A ideia foi construir uma API completa, aplicando boas práticas como separaçã
 ## Regras implementadas
 
 - Não permite cadastrar duas portas com o mesmo nome
-- Não permite deletar um usuário que já possui acessos registrados
+- Não permite deletar usuários que possuem acessos registrados
 - Retorna mensagens de erro mais claras (ex: usuário não encontrado)
 
 ---
@@ -28,7 +28,7 @@ A ideia foi construir uma API completa, aplicando boas práticas como separaçã
 
 - Java 21
 - Spring Boot
-- Spring Data JPA
+- Spring Data JPA (Hibernate)
 - PostgreSQL
 - Lombok
 - Maven
